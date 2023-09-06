@@ -124,6 +124,10 @@ defmodule Rustler.Compiler.Config do
     paths
   end
 
+  defp gather_local_crates(packages, [nil | rest], paths_acc, visited) do
+       gather_local_crates(packages, rest, paths_acc, visited)
+  end
+
   defp gather_local_crates(packages, [current_spec | rest], paths_acc, visited) do
     local_deps =
       current_spec["dependencies"]
